@@ -15,15 +15,27 @@ const CELL_STYLE = {
 class Game extends Component {
   constructor(props) {
     super(props);
+    this.state = { cells: this.getNewGameCells() };
+  }
 
-    const emptyList = [...Array(props.cellQuantity).keys()].map(position => ({
+  componentWillReceiveProps({ nbTry: nextNbTry }) {
+    if (this.props.nbTry !== nextNbTry)
+      this.setState({ cells: this.getNewGameCells() });
+  }
+
+  getNewGameCells = () => {
+    const { cellQuantity, mineQuantity } = this.props;
+
+    const emptyList = [...Array(cellQuantity).keys()].map(position => ({
       type: '',
       position,
       hidden: true,
       flag: false,
     }));
-    const cellsWithMines = this.getMines(emptyList, props.mineQuantity);
-    const fullCells = cellsWithMines
+
+    const cellsWithMines = this.getMines(emptyList, mineQuantity);
+
+    return cellsWithMines
       .map(cell => {
         if (cell.type === 'mine')
           return cell;
@@ -34,8 +46,6 @@ class Game extends Component {
           return { type: 'clean', position, mines, hidden: true };
         }
       });
-
-    this.state = { cells: fullCells, status: 'playing' };
   }
 
   isGameWon = allCells => {
@@ -49,9 +59,6 @@ class Game extends Component {
 
       return false;
     }, true);
-
-    if (isWon)
-      this.props.onWin();
 
     return isWon;
   }
@@ -147,9 +154,10 @@ class Game extends Component {
         return cell;
     });
 
-    const status = this.isGameWon(newCells) ? 'won' : this.state.status;
+    if (this.isGameWon(newCells))
+      this.props.onWin();
 
-    this.setState({ cells: newCells, status });
+    this.setState({ cells: newCells });
   }
 
   onContextMenu = cellClicked => e => {

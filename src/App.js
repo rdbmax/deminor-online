@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Game from './Game';
+import Tools from './Tools';
 
 const APP_STYLE = {
   position: 'relative',
@@ -24,13 +25,41 @@ const GAME_COLORS = {
 };
 
 class App extends Component {
-  state = { status: 'playing' }
+  constructor() {
+    super();
+    this.state = { status: 'playing', time: 0, nbTry: 0 };
+    this.startTimer();
+  }
+
+  componentWillUnMount() {
+    this.stopTimer();
+  }
+
+  startTimer = () => {
+    if (this.onSecondsChange)
+      this.stopTimer();
+
+    this.onSecondsChange = setInterval(() => {
+      this.setState({ time: this.state.time + 1 });
+    }, 1000);
+  }
+
+  stopTimer = () => {
+    clearInterval(this.onSecondsChange);
+  }
+
+  restart = () => {
+    this.setState({ time: 0, status: 'playing', nbTry: this.state.nbTry + 1 });
+    this.startTimer();
+  }
 
   onWin = () => {
+    this.stopTimer();
     this.setState({ status: 'won' });
   }
 
   onLose = () => {
+    this.stopTimer();
     this.setState({ status: 'lost' });
   }
 
@@ -40,10 +69,16 @@ class App extends Component {
   })
 
   render() {
+    const { time, status, nbTry } = this.state;
+
     return (
       <div style={this.getAppStyle()}>
         <div className="container" style={GAME_STYLE}>
+          <Tools time={time} status={status} onRestart={this.restart} />
+
           <Game
+            status={status}
+            nbTry={nbTry}
             cellQuantity={100}
             mineQuantity={15}
             onLose={this.onLose}
