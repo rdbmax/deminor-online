@@ -143,7 +143,7 @@ class Game extends Component {
         return cell;
     });
 
-    const status = this.isGameWon() ? 'won' : this.state.status;
+    const status = this.isGameWon(newCells) ? 'won' : this.state.status;
 
     this.setState({ cells: newCells, status });
   }
