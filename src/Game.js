@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import FlagIcon from 'ionicons/dist/svg/ios-flag.svg';
+import FlameIcon from 'ionicons/dist/svg/md-flame.svg';
 
 const CELL_STYLE = {
   width: '50px',
@@ -111,10 +113,12 @@ class Game extends Component {
 
   displayCell = ({ type, position, mines, hidden, flag }) => {
     if (hidden)
-      return flag ? 'flag' : '';
+      return flag
+        ? <img src={FlagIcon} style={{ width: '100%' }} alt="flag" />
+        : '';
 
     return (type === 'mine')
-      ? type
+      ? <img src={FlameIcon} style={{ width: '100%' }} alt="flame" />
       : mines;
   }
 
