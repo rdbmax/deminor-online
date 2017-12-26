@@ -3,8 +3,8 @@ import FlagIcon from 'ionicons/dist/svg/ios-flag.svg';
 import FlameIcon from 'ionicons/dist/svg/md-flame.svg';
 
 const CELL_STYLE = {
-  width: '50px',
-  height: '50px',
+  width: '10%',
+  height: '10%',
   border: '1px solid black',
   display: 'inline-block',
   verticalAlign: 'top',

@@ -9,8 +9,8 @@ const APP_STYLE = {
 };
 
 const GAME_STYLE = {
-  width: '500px',
-  height: '500px',
+  width: '400px',
+  height: '400px',
   position: 'absolute',
   left: '50%',
   top: '50%',
