@@ -27,7 +27,20 @@ const GAME_COLORS = {
 class App extends Component {
   constructor() {
     super();
-    this.state = { status: 'playing', time: 0, nbTry: 0 };
+
+    // do this if `scores` is invalid json
+    const oldScoreString = localStorage.getItem('scores') || '[]';
+    let scores;
+
+    try {
+      scores = JSON.parse(oldScoreString);
+    } catch (e) {
+      scores = [];
+    }
+
+    localStorage.setItem('scores', JSON.stringify(scores));
+
+    this.state = { status: 'playing', time: 0, nbTry: 0, scores: [] };
     this.startTimer();
   }
 
@@ -56,6 +69,20 @@ class App extends Component {
   onWin = () => {
     this.stopTimer();
     this.setState({ status: 'won' });
+
+    const userName = prompt('Please enter your name to save your score or cancel');
+    if (userName) {
+      const newScore = { name: userName, time: 264 };
+      const scoresString = localStorage.getItem('scores');
+      const scores = scoresString ? [newScore, ...JSON.parse(scoresString)] : [newScore];
+      this.setState({ scores });
+      localStorage.setItem('scores', JSON.stringify(scores));
+    }
+
+    // log scores before to display it in a table
+    console.log(
+      JSON.parse(localStorage.getItem('scores'))
+    );
   }
 
   onLose = () => {
