@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Game from './Game';
 import Tools from './Tools';
+import Scores from './Scores';
 
 const APP_STYLE = {
   position: 'relative',
@@ -28,7 +29,6 @@ class App extends Component {
   constructor() {
     super();
 
-    // do this if `scores` is invalid json
     const oldScoreString = localStorage.getItem('scores') || '[]';
     let scores;
 
@@ -40,7 +40,7 @@ class App extends Component {
 
     localStorage.setItem('scores', JSON.stringify(scores));
 
-    this.state = { status: 'playing', time: 0, nbTry: 0, scores: [] };
+    this.state = { status: 'playing', time: 0, nbTry: 0, scores };
     this.startTimer();
   }
 
@@ -70,19 +70,15 @@ class App extends Component {
     this.stopTimer();
     this.setState({ status: 'won' });
 
-    const userName = prompt('Please enter your name to save your score or cancel');
-    if (userName) {
-      const newScore = { name: userName, time: 264 };
+    const name = prompt('Please enter your name to save your score or cancel');
+    if (name) {
+      const { time } = this.state;
+      const newScore = { name, time };
       const scoresString = localStorage.getItem('scores');
       const scores = scoresString ? [newScore, ...JSON.parse(scoresString)] : [newScore];
       this.setState({ scores });
       localStorage.setItem('scores', JSON.stringify(scores));
     }
-
-    // log scores before to display it in a table
-    console.log(
-      JSON.parse(localStorage.getItem('scores'))
-    );
   }
 
   onLose = () => {
@@ -96,12 +92,13 @@ class App extends Component {
   })
 
   render() {
-    const { time, status, nbTry } = this.state;
+    const { time, status, nbTry, scores } = this.state;
 
     return (
       <div style={this.getAppStyle()}>
         <div className="container" style={GAME_STYLE}>
           <Tools time={time} status={status} onRestart={this.restart} />
+          <Scores scores={scores} />
 
           <Game
             status={status}
