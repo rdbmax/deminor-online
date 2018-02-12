@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Game from './Game';
 import Tools from './Tools';
 import Scores from './Scores';
-import { GAME_STATUS } from './constants';
+import { GAME_STATUS, MINE_QUANTITY } from './constants';
 
 const APP_STYLE = {
   position: 'relative',
@@ -41,7 +41,13 @@ class App extends Component {
 
     localStorage.setItem('scores', JSON.stringify(scores));
 
-    this.state = { status: GAME_STATUS.PLAYING, time: 0, nbTry: 0, scores };
+    this.state = {
+      status: GAME_STATUS.PLAYING,
+      time: 0,
+      nbTry: 0,
+      remainingMine: MINE_QUANTITY,
+      scores,
+    };
     this.startTimer();
   }
 
@@ -63,9 +69,19 @@ class App extends Component {
   }
 
   restart = () => {
-    this.setState({ time: 0, status: GAME_STATUS.PLAYING, nbTry: this.state.nbTry + 1 });
+    this.setState({
+      time: 0,
+      status: GAME_STATUS.PLAYING,
+      remainingMine: MINE_QUANTITY,
+      nbTry: this.state.nbTry + 1,
+    });
     this.startTimer();
   }
+
+  getAppStyle = () => ({
+    ...APP_STYLE,
+    backgroundColor: GAME_COLORS[this.state.status],
+  })
 
   onWin = () => {
     this.stopTimer();
@@ -87,27 +103,28 @@ class App extends Component {
     this.setState({ status: GAME_STATUS.LOST });
   }
 
-  getAppStyle = () => ({
-    ...APP_STYLE,
-    backgroundColor: GAME_COLORS[this.state.status],
-  })
+  onPutFlag = flagAmount => {
+    const remainingMine = MINE_QUANTITY - flagAmount;
+    this.setState({ remainingMine });
+  }
 
   render() {
-    const { time, status, nbTry, scores } = this.state;
+    const { time, status, nbTry, scores, remainingMine } = this.state;
 
     return (
       <div style={this.getAppStyle()}>
         <div className="container" style={GAME_STYLE}>
-          <Tools time={time} status={status} onRestart={this.restart} />
+          <Tools time={time} status={status} remainingMine={remainingMine} onRestart={this.restart} />
           <Scores scores={scores} />
 
           <Game
             status={status}
             nbTry={nbTry}
             cellQuantity={100}
-            mineQuantity={15}
+            mineQuantity={MINE_QUANTITY}
             onLose={this.onLose}
             onWin={this.onWin}
+            onPutFlag={this.onPutFlag}
           />
         </div>
       </div>

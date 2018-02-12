@@ -23,3 +23,5 @@ export const GAME_STATUS = {
   WON: 'won',
   LOST: 'lost',
 };
+
+export const MINE_QUANTITY = 15;

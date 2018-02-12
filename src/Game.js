@@ -180,12 +180,17 @@ class Game extends Component {
   }
 
   onContextMenu = cellClicked => e => {
+    const { onPutFlag } = this.props;
+
     if (cellClicked.hidden === true) {
       e.preventDefault();
 
       const newCells = this.state.cells.map(cell => (cell.position === cellClicked.position)
           ? { ...cell, flag: !cell.flag }
           : cell);
+
+      const flagAmount = newCells.filter(({ flag }) => flag).length;
+      onPutFlag(flagAmount);
 
       this.setState({ cells: newCells });
     }

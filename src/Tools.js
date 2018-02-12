@@ -10,10 +10,15 @@ const TOOLS_STYLE = {
   padding: '10px 0px',
 };
 
-const Tools = ({ time, status, onRestart }) => (
+const TOOL_STYLE = {
+  marginRight: '10px',
+};
+
+const Tools = ({ time, status, remainingMine, onRestart }) => (
   <div style={TOOLS_STYLE}>
-    <button onClick={onRestart}>restart</button>
-    { time }
+    <button style={TOOL_STYLE} onClick={onRestart}>restart</button>
+    <span style={TOOL_STYLE}>{ `time : ${time}` }</span>
+    <span style={TOOL_STYLE}>{ `remaining : ${remainingMine}` }</span>
   </div>
 );
 
