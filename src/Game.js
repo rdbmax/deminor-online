@@ -4,6 +4,7 @@ import FlameIcon from 'ionicons/dist/svg/md-flame.svg';
 import { GAME_STATUS } from './constants';
 
 const CELL_STYLE = {
+  position: 'relative',
   width: '10%',
   height: '10%',
   border: '1px solid black',
@@ -11,6 +12,15 @@ const CELL_STYLE = {
   verticalAlign: 'top',
   boxSizing: 'border-box',
   cursor: 'pointer',
+};
+
+const MINE_STYLE = { width: '100%' };
+const FLAG_STYLE = { width: '100%' };
+const QUANTITY_STYLE = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
 };
 
 class Game extends Component {
@@ -122,12 +132,12 @@ class Game extends Component {
   displayCell = ({ type, position, mines, hidden, flag }) => {
     if (hidden)
       return flag
-        ? <img src={FlagIcon} style={{ width: '100%' }} alt="flag" />
+        ? <img src={FlagIcon} style={FLAG_STYLE} alt="flag" />
         : '';
 
     return (type === 'mine')
-      ? <img src={FlameIcon} style={{ width: '100%' }} alt="flame" />
-      : mines;
+      ? <img src={FlameIcon} style={MINE_STYLE} alt="flame" />
+      : <span style={QUANTITY_STYLE}>{ mines }</span>;
   }
 
   findNextNullMinesCellsIndex = (firstCell, list) => Object
