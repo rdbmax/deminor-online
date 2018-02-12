@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Game from './Game';
 import Tools from './Tools';
 import Scores from './Scores';
+import { GAME_STATUS } from './constants';
 
 const APP_STYLE = {
   position: 'relative',
@@ -40,7 +41,7 @@ class App extends Component {
 
     localStorage.setItem('scores', JSON.stringify(scores));
 
-    this.state = { status: 'playing', time: 0, nbTry: 0, scores };
+    this.state = { status: GAME_STATUS.PLAYING, time: 0, nbTry: 0, scores };
     this.startTimer();
   }
 
@@ -62,13 +63,13 @@ class App extends Component {
   }
 
   restart = () => {
-    this.setState({ time: 0, status: 'playing', nbTry: this.state.nbTry + 1 });
+    this.setState({ time: 0, status: GAME_STATUS.PLAYING, nbTry: this.state.nbTry + 1 });
     this.startTimer();
   }
 
   onWin = () => {
     this.stopTimer();
-    this.setState({ status: 'won' });
+    this.setState({ status: GAME_STATUS.WON });
 
     const name = prompt('Please enter your name to save your score or cancel');
     if (name) {
@@ -83,7 +84,7 @@ class App extends Component {
 
   onLose = () => {
     this.stopTimer();
-    this.setState({ status: 'lost' });
+    this.setState({ status: GAME_STATUS.LOST });
   }
 
   getAppStyle = () => ({

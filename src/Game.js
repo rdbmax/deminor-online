@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FlagIcon from 'ionicons/dist/svg/ios-flag.svg';
 import FlameIcon from 'ionicons/dist/svg/md-flame.svg';
+import { GAME_STATUS } from './constants';
 
 const CELL_STYLE = {
   width: '10%',
@@ -136,8 +137,9 @@ class Game extends Component {
 
   onClickCell = cellClicked => () => {
     const { cells } = this.state;
+    const { status } = this.props;
 
-    if (cellClicked.flag)
+    if (cellClicked.flag || status !== GAME_STATUS.PLAYING)
       return;
 
     if (cellClicked.type === 'mine')
