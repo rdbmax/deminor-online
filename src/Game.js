@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FlagIcon from 'ionicons/dist/svg/ios-flag.svg';
 import FlameIcon from 'ionicons/dist/svg/md-flame.svg';
-import { GAME_STATUS } from './constants';
+import { GAME_STATUS, COLORS } from './constants';
 
 const CELL_STYLE = {
   position: 'relative',
@@ -191,11 +191,21 @@ class Game extends Component {
     }
   }
 
+  getCellStyle = cell => {
+    if (cell.hidden)
+      return CELL_STYLE;
+
+    if (cell.type === 'mine')
+      return { ...CELL_STYLE, backgroundColor: COLORS.cell };
+
+    return { ...CELL_STYLE, backgroundColor: COLORS.cell, color: COLORS[`mines${cell.mines}`] };
+  }
+
   render() {
     return this.state.cells.map(cell =>
       <div
         key={cell.position}
-        style={CELL_STYLE}
+        style={this.getCellStyle(cell)}
         onClick={this.onClickCell(cell)}
         onContextMenu={this.onContextMenu(cell)}
       >
