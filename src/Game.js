@@ -140,23 +140,37 @@ class Game extends Component {
       : <span style={QUANTITY_STYLE}>{ mines }</span>;
   }
 
-  findNextNullMinesCellsIndex = (firstCell, list) => Object
-    .values(this.getCloseCells(firstCell))
-    .filter(({ hidden, mines }) => (mines === 0 && hidden === true))
-    .map(({ position }) => position);
+  findNullCells = cells => {
+    const nextMines = cells
+      .map(cell => [ cell, ...Object.values(this.getCloseCells(cell)) ]
+          .filter(cell => (cell.type === 'clean' && cell.mines === 0))
+      );
+
+    const flattenNextMines = [].concat(...nextMines);
+
+    let uniqCells = {};
+    flattenNextMines.forEach(cell => {
+      uniqCells[cell.position] = cell;
+    });
+    uniqCells = Object.values(uniqCells);
+
+    return (cells.length === uniqCells.length)
+      ? uniqCells
+      : this.findNullCells(uniqCells);
+  }
 
   onClickCell = cellClicked => () => {
     const { cells } = this.state;
-    const { status } = this.props;
+    const { status, onLose, onWin } = this.props;
 
     if (cellClicked.flag || status !== GAME_STATUS.PLAYING)
       return;
 
     if (cellClicked.type === 'mine')
-      this.props.onLose()
+      onLose();
 
     const cellsToShow = (cellClicked.type === 'clean' && cellClicked.mines === 0)
-      ? [cellClicked.position, ...this.findNextNullMinesCellsIndex(cellClicked)]
+      ? this.findNullCells([cellClicked]).map(({ position }) => position)
       : [cellClicked.position];
 
     const newCells = cells.map(cell => {
@@ -167,7 +181,7 @@ class Game extends Component {
     });
 
     if (this.isGameWon(newCells))
-      this.props.onWin();
+      onWin();
 
     this.setState({ cells: newCells });
   }
