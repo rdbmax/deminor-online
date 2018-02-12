@@ -8,11 +8,12 @@ const SCORES_STYLE = {
   paddingLeft: '20px',
 };
 
-const Scores = ({ scores }) => (
+const Scores = ({ scores, resetScores }) => (
   <div style={SCORES_STYLE}>
     { scores.map(({ name, time }, index) => (
       <p key={index}>{ `${name}: ${time}` }</p>
     )) }
+    <button onClick={resetScores}>Reset scores</button>
   </div>
 );
 

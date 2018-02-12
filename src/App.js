@@ -78,6 +78,11 @@ class App extends Component {
     this.startTimer();
   }
 
+  resetScores = () => {
+    this.setState({ scores: [] });
+    localStorage.setItem('scores', '[]');
+  }
+
   getAppStyle = () => ({
     ...APP_STYLE,
     backgroundColor: GAME_COLORS[this.state.status],
@@ -115,7 +120,7 @@ class App extends Component {
       <div style={this.getAppStyle()}>
         <div className="container" style={GAME_STYLE}>
           <Tools time={time} status={status} remainingMine={remainingMine} onRestart={this.restart} />
-          <Scores scores={scores} />
+          <Scores scores={scores} resetScores={this.resetScores} />
 
           <Game
             status={status}
