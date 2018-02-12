@@ -76,16 +76,12 @@ class Game extends Component {
 
   getMines = (cells, mines) => {
     const candidatePosition = Math.floor(Math.random() * cells.length);
+
     if (cells[candidatePosition].type !== 'mine') {
       cells[candidatePosition].type = 'mine';
-
-      if (mines === 1)
-        return cells;
-      else
-        return this.getMines(cells, mines -= 1);
+      return (mines === 1) ? cells : this.getMines(cells, mines -= 1);
     }
-    else
-      return this.getMines(cells, mines);
+    else return this.getMines(cells, mines);
   }
 
   getCloseCells = (cell, allCells) => {
@@ -173,12 +169,9 @@ class Game extends Component {
       ? this.findNullCells([cellClicked]).map(({ position }) => position)
       : [cellClicked.position];
 
-    const newCells = cells.map(cell => {
-      if (cellsToShow.includes(cell.position))
-        return { ...cell, hidden: false };
-      else
-        return cell;
-    });
+    const newCells = cells.map(cell => (cellsToShow.includes(cell.position))
+        ? { ...cell, hidden: false }
+        : cell);
 
     if (this.isGameWon(newCells))
       onWin();
@@ -189,19 +182,17 @@ class Game extends Component {
   onContextMenu = cellClicked => e => {
     if (cellClicked.hidden === true) {
       e.preventDefault();
-      const newCells = this.state.cells.map(cell => {
-        if (cell.position === cellClicked.position)
-          return { ...cell, flag: !cell.flag }
 
-        return cell
-      });
+      const newCells = this.state.cells.map(cell => (cell.position === cellClicked.position)
+          ? { ...cell, flag: !cell.flag }
+          : cell);
 
       this.setState({ cells: newCells });
     }
   }
 
   render() {
-    return this.state.cells.map((cell, index) =>
+    return this.state.cells.map(cell =>
       <div
         key={cell.position}
         style={CELL_STYLE}
