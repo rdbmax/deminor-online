@@ -1,15 +1,18 @@
 import React from 'react';
+import injectSheet from 'react-jss';
 
-const SCORES_STYLE = {
-  position: 'absolute',
-  right: 0,
-  color: 'white',
-  transform: 'translateX(100%)',
-  paddingLeft: '20px',
-};
+const styles = {
+  scores: {
+    position: 'absolute',
+    right: 0,
+    color: 'white',
+    transform: 'translateX(100%)',
+    paddingLeft: '20px',
+  }
+}
 
-const Scores = ({ scores, resetScores }) => (
-  <div style={SCORES_STYLE}>
+const Scores = ({ classes, scores, resetScores }) => (
+  <div className={classes.scores}>
     { scores.map(({ name, time }, index) => (
       <p key={index}>{ `${name}: ${time}` }</p>
     )) }
@@ -17,4 +20,4 @@ const Scores = ({ scores, resetScores }) => (
   </div>
 );
 
-export default Scores;
+export default injectSheet(styles)(Scores);

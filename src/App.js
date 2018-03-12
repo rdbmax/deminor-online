@@ -1,29 +1,25 @@
 import React, { Component } from 'react';
+import injectSheet from 'react-jss';
 import Game from './Game';
 import Tools from './Tools';
 import Scores from './Scores';
 import { GAME_STATUS, MINE_QUANTITY } from './constants';
 
-const APP_STYLE = {
-  position: 'relative',
-  width: '100vw',
-  height: '100vh',
-};
-
-const GAME_STYLE = {
-  width: '400px',
-  height: '400px',
-  position: 'absolute',
-  left: '50%',
-  top: '50%',
-  transform: 'translate(-50%, -50%)',
-  backgroundColor: '#949494',
-};
-
-const GAME_COLORS = {
-  playing: 'black',
-  won: 'green',
-  lost: 'red',
+const styles = {
+  container: {
+    width: '400px',
+    height: '400px',
+    position: 'absolute',
+    left: '50%',
+    top: '50%',
+    transform: 'translate(-50%, -50%)',
+    backgroundColor: '#949494',
+  },
+  app: {
+    position: 'relative',
+    width: '100vw',
+    height: '100vh',
+  },
 };
 
 class App extends Component {
@@ -40,6 +36,12 @@ class App extends Component {
     }
 
     localStorage.setItem('scores', JSON.stringify(scores));
+
+    this.colors = {
+      playing: 'black',
+      won: 'green',
+      lost: 'red',
+    };
 
     this.state = {
       status: GAME_STATUS.PLAYING,
@@ -83,11 +85,6 @@ class App extends Component {
     localStorage.setItem('scores', '[]');
   }
 
-  getAppStyle = () => ({
-    ...APP_STYLE,
-    backgroundColor: GAME_COLORS[this.state.status],
-  })
-
   onWin = () => {
     this.stopTimer();
     this.setState({ status: GAME_STATUS.WON });
@@ -114,11 +111,12 @@ class App extends Component {
   }
 
   render() {
+    const { classes: { container, app } } = this.props;
     const { time, status, nbTry, scores, remainingMine } = this.state;
 
     return (
-      <div style={this.getAppStyle()}>
-        <div className="container" style={GAME_STYLE}>
+      <div className={app} style={{ backgroundColor: this.colors[status] }}>
+        <div className={container}>
           <Tools time={time} status={status} remainingMine={remainingMine} onRestart={this.restart} />
           <Scores scores={scores} resetScores={this.resetScores} />
 
@@ -137,4 +135,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default injectSheet(styles)(App);

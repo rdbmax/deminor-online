@@ -1,27 +1,6 @@
 import React, { Component } from 'react';
-import FlagIcon from 'ionicons/dist/svg/ios-flag.svg';
-import FlameIcon from 'ionicons/dist/svg/md-flame.svg';
-import { GAME_STATUS, COLORS } from './constants';
-
-const CELL_STYLE = {
-  position: 'relative',
-  width: '10%',
-  height: '10%',
-  border: '1px solid black',
-  display: 'inline-block',
-  verticalAlign: 'top',
-  boxSizing: 'border-box',
-  cursor: 'pointer',
-};
-
-const MINE_STYLE = { width: '100%' };
-const FLAG_STYLE = { width: '100%' };
-const QUANTITY_STYLE = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-};
+import Cell from './Cell';
+import { GAME_STATUS } from './constants';
 
 class Game extends Component {
   constructor(props) {
@@ -125,17 +104,6 @@ class Game extends Component {
     return str[str.length - 1];
   }
 
-  displayCell = ({ type, position, mines, hidden, flag }) => {
-    if (hidden)
-      return flag
-        ? <img src={FlagIcon} style={FLAG_STYLE} alt="flag" />
-        : '';
-
-    return (type === 'mine')
-      ? <img src={FlameIcon} style={MINE_STYLE} alt="flame" />
-      : <span style={QUANTITY_STYLE}>{ mines }</span>;
-  }
-
   findNullCells = cells => {
     const nextMines = cells
       .map(cell => [ cell, ...Object.values(this.getCloseCells(cell)) ]
@@ -196,26 +164,14 @@ class Game extends Component {
     }
   }
 
-  getCellStyle = cell => {
-    if (cell.hidden)
-      return CELL_STYLE;
-
-    if (cell.type === 'mine')
-      return { ...CELL_STYLE, backgroundColor: COLORS.cell };
-
-    return { ...CELL_STYLE, backgroundColor: COLORS.cell, color: COLORS[`mines${cell.mines}`] };
-  }
-
   render() {
     return this.state.cells.map(cell =>
-      <div
+      <Cell
         key={cell.position}
-        style={this.getCellStyle(cell)}
+        cell={cell}
         onClick={this.onClickCell(cell)}
-        onContextMenu={this.onContextMenu(cell)}
-      >
-        { this.displayCell(cell) }
-      </div>
+        onContextClick={this.onContextMenu(cell)}
+      />
     );
   }
 }

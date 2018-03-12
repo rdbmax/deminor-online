@@ -1,25 +1,27 @@
 import React from 'react';
+import injectSheet from 'react-jss';
 
-const TOOLS_STYLE = {
-  position: 'absolute',
-  top: '-15px',
-  left: 0,
-  width: '100%',
-  transform: 'translateY(-100%)',
-  color: 'white',
-  padding: '10px 0px',
+const styles = {
+  tools: {
+    position: 'absolute',
+    top: '-15px',
+    left: 0,
+    width: '100%',
+    transform: 'translateY(-100%)',
+    color: 'white',
+    padding: '10px 0px',
+  },
+  tool: {
+    marginRight: '10px',
+  },
 };
 
-const TOOL_STYLE = {
-  marginRight: '10px',
-};
-
-const Tools = ({ time, status, remainingMine, onRestart }) => (
-  <div style={TOOLS_STYLE}>
-    <button style={TOOL_STYLE} onClick={onRestart}>restart</button>
-    <span style={TOOL_STYLE}>{ `time : ${time}` }</span>
-    <span style={TOOL_STYLE}>{ `remaining : ${remainingMine}` }</span>
+const Tools = ({ classes, time, status, remainingMine, onRestart }) => (
+  <div className={classes.tools}>
+    <button className={classes.tool} onClick={onRestart}>restart</button>
+    <span className={classes.tool}>{ `time : ${time}` }</span>
+    <span className={classes.tool}>{ `remaining : ${remainingMine}` }</span>
   </div>
 );
 
-export default Tools;
+export default injectSheet(styles)(Tools);
