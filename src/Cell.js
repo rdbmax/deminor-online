@@ -15,6 +15,7 @@ const styles = {
       verticalAlign: 'top',
       boxSizing: 'border-box',
       cursor: 'pointer',
+      backgroundColor: COLORS.hiddenCell,
     };
 
     if (cell.hidden)
