@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import FlagIcon from 'ionicons/dist/svg/ios-flag.svg';
-import FlameIcon from 'ionicons/dist/svg/md-flame.svg';
+import FlagIcon from 'ionicons/dist/ionicons/svg/ios-flag.svg';
+import FlameIcon from 'ionicons/dist/ionicons/svg/md-flame.svg';
 import { GAME_STATUS, COLORS } from './constants';
 
 const CELL_STYLE = {

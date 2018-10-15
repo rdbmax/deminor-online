@@ -4694,10 +4694,10 @@ invert-kv@^2.0.0:
   resolved "https://registry.yarnpkg.com/invert-kv/-/invert-kv-2.0.0.tgz#7393f5afa59ec9ff5f67a27620d11c226e3eec02"
   integrity sha512-wPVv/y/QQ/Uiirj/vh3oP+1Ww+AWehmi1g5fFWGPF6IpCBCDVrhgHRMvrLfdYcwDh3QJbGXDW4JAuzxElLSqKA==
 
-ionicons@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/ionicons/-/ionicons-3.0.0.tgz#40b8daf4fd7a31150bd002160f66496e22a98c3c"
-  integrity sha1-QLja9P16MRUL0AIWD2ZJbiKpjDw=
+ionicons@^4.4.6:
+  version "4.4.6"
+  resolved "https://registry.yarnpkg.com/ionicons/-/ionicons-4.4.6.tgz#d7eb2790c989ce4a999f6937f08883c22fe08923"
+  integrity sha512-X+HRyn6Y0HXxSEjIOSH+p7He8QEaAJj3644Ce+MBFVwA8GHbTaPQcA/hO/L9AxzERrOd5UtN1JkgD1TSgPR7IA==
 
 ip-regex@^2.1.0:
   version "2.1.0"

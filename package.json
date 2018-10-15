@@ -4,7 +4,7 @@
   "homepage": "https://rdbmax.github.io/deminor-online",
   "private": true,
   "dependencies": {
-    "ionicons": "^3.0.0",
+    "ionicons": "^4.4.6",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-scripts": "2.0.5"
