@@ -29,8 +29,8 @@ class Game extends Component {
     this.state = { cells: this.getNewGameCells() };
   }
 
-  componentWillReceiveProps({ nbTry: nextNbTry }) {
-    if (this.props.nbTry !== nextNbTry)
+  componentDidUpdate({ nbTry: previousNbTry }) {
+    if (this.props.nbTry !== previousNbTry)
       this.setState({ cells: this.getNewGameCells() });
   }
 
