@@ -1,64 +1,49 @@
 import React from 'react';
-import injectSheet from 'react-jss';
+import styled from 'styled-components';
 import FlagIcon from 'ionicons/dist/ionicons/svg/ios-flag.svg';
 import FlameIcon from 'ionicons/dist/ionicons/svg/md-flame.svg';
 import { COLORS } from './constants';
 
-const styles = {
-  cell: ({ cell }) => {
-    const baseCell = {
-      position: 'relative',
-      width: '10%',
-      height: '10%',
-      border: '1px solid black',
-      display: 'inline-block',
-      verticalAlign: 'top',
-      boxSizing: 'border-box',
-      cursor: 'pointer',
-      backgroundColor: COLORS.hiddenCell,
-    };
+const CellStyled = styled('div')`
+  position: relative;
+  width: 10%;
+  height: 10%;
+  border: 1px solid black;
+  display: inline-block;
+  vertical-align: top;
+  box-sizing: border-box;
+  cursor: pointer;
+  background-color: ${({ cell }) => (cell.hidden)
+    ? COLORS.hiddenCell
+    : COLORS.cell};
+  ${({ cell }) => (cell.type !== 'mine' && !cell.hidden)
+    ? `color: ${COLORS[`mines${cell.mines}`]};`
+    : ''}
+`;
 
-    if (cell.hidden)
-      return baseCell;
+const NumberStyled = styled('span')`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`
 
-    if (cell.type === 'mine')
-      return { ...baseCell, backgroundColor: COLORS.cell };
+const IconStyled = styled('img')`
+  width: 100%;
+`
 
-    return { ...baseCell, backgroundColor: COLORS.cell, color: COLORS[`mines${cell.mines}`] };
-  },
-  flag: {
-    width: '100%',
-  },
-  mine: {
-    width: '100%',
-  },
-  number: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-  }
-};
-
-const getCellContent = ({ type, position, mines, hidden, flag }, classes) => {
-  if (hidden)
-    return flag
-      ? <img src={FlagIcon} className={classes.flag} alt="flag" />
-      : '';
-
-  return (type === 'mine')
-    ? <img src={FlameIcon} className={classes.mine} alt="flame" />
-    : <span className={classes.number}>{ mines }</span>;
-}
-
-const Cell = ({ classes, cell, onClick, children, onContextClick }) => (
-  <div
-    className={classes.cell}
-    onClick={onClick}
-    onContextMenu={onContextClick}
-  >
-    { getCellContent(cell, classes) }
-  </div>
+const Cell = ({ cell, onClick, children, onContextClick }) => (
+  <CellStyled cell={cell} onClick={onClick} onContextMenu={onContextClick}>
+    {
+      cell.hidden
+        ? (cell.flag
+          ? <IconStyled src={FlagIcon} alt="flag" />
+          : '')
+        : (cell.type === 'mine'
+          ?  <IconStyled src={FlameIcon} alt="flame" />
+          : <NumberStyled>{ cell.mines }</NumberStyled>)
+    }
+  </CellStyled>
 );
 
-export default injectSheet(styles)(Cell);
+export default Cell;

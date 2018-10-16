@@ -1,23 +1,21 @@
 import React from 'react';
-import injectSheet from 'react-jss';
+import styled from 'styled-components';
 
-const styles = {
-  scores: {
-    position: 'absolute',
-    right: 0,
-    color: 'white',
-    transform: 'translateX(100%)',
-    paddingLeft: '20px',
-  }
-}
+const Wrapper = styled('div')`
+  position: absolute;
+  right: 0;
+  color: white;
+  transform: translateX(100%);
+  padding-left: 20px;
+`
 
-const Scores = ({ classes, scores, resetScores }) => (
-  <div className={classes.scores}>
+const Scores = ({ scores, resetScores }) => (
+  <Wrapper>
     { scores.map(({ name, time }, index) => (
       <p key={index}>{ `${name}: ${time}` }</p>
     )) }
     <button onClick={resetScores}>Reset scores</button>
-  </div>
+  </Wrapper>
 );
 
-export default injectSheet(styles)(Scores);
+export default Scores;

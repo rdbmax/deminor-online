@@ -1,27 +1,30 @@
 import React from 'react';
-import injectSheet from 'react-jss';
+import styled from 'styled-components';
 
-const styles = {
-  tools: {
-    position: 'absolute',
-    top: '-15px',
-    left: 0,
-    width: '100%',
-    transform: 'translateY(-100%)',
-    color: 'white',
-    padding: '10px 0px',
-  },
-  tool: {
-    marginRight: '10px',
-  },
-};
+const ToolsWrapper = styled('div')`
+  position: absolute;
+  top: -15px;
+  left: 0;
+  width: 100%;
+  transform: translateY(-100%);
+  color: white;
+  padding: 10px 0px;
+`
 
-const Tools = ({ classes, time, status, remainingMine, onRestart }) => (
-  <div className={classes.tools}>
-    <button className={classes.tool} onClick={onRestart}>restart</button>
-    <span className={classes.tool}>{ `time : ${time}` }</span>
-    <span className={classes.tool}>{ `remaining : ${remainingMine}` }</span>
-  </div>
+const ToolSpan = styled('span')`
+  margin-right: 10px;
+`
+
+const ToolButton = styled('button')`
+  margin-right: 10px;
+`
+
+const Tools = ({ time, status, remainingMine, onRestart }) => (
+  <ToolsWrapper>
+    <ToolButton onClick={onRestart}>restart</ToolButton>
+    <ToolSpan>{ `time : ${time}` }</ToolSpan>
+    <ToolSpan>{ `remaining : ${remainingMine}` }</ToolSpan>
+  </ToolsWrapper>
 );
 
-export default injectSheet(styles)(Tools);
+export default Tools;

@@ -1,26 +1,26 @@
 import React, { Component } from 'react';
-import injectSheet from 'react-jss';
+import styled from 'styled-components';
 import Game from './Game';
 import Tools from './Tools';
 import Scores from './Scores';
 import { GAME_STATUS, MINE_QUANTITY } from './constants';
 
-const styles = {
-  container: {
-    width: '400px',
-    height: '400px',
-    position: 'absolute',
-    left: '50%',
-    top: '50%',
-    transform: 'translate(-50%, -50%)',
-    backgroundColor: '#949494',
-  },
-  app: {
-    position: 'relative',
-    width: '100vw',
-    height: '100vh',
-  },
-};
+const Container = styled('div')`
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #949494;
+`
+
+const AppWrapper = styled('div')`
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: ${({ backgroundColor }) => backgroundColor};
+`
 
 class App extends Component {
   constructor() {
@@ -111,12 +111,11 @@ class App extends Component {
   }
 
   render() {
-    const { classes: { container, app } } = this.props;
     const { time, status, nbTry, scores, remainingMine } = this.state;
 
     return (
-      <div className={app} style={{ backgroundColor: this.colors[status] }}>
-        <div className={container}>
+      <AppWrapper backgroundColor={this.colors[status]}>
+        <Container>
           <Tools time={time} status={status} remainingMine={remainingMine} onRestart={this.restart} />
           <Scores scores={scores} resetScores={this.resetScores} />
 
@@ -129,10 +128,10 @@ class App extends Component {
             onWin={this.onWin}
             onPutFlag={this.onPutFlag}
           />
-        </div>
-      </div>
+        </Container>
+      </AppWrapper>
     );
   }
 }
 
-export default injectSheet(styles)(App);
+export default App;
