@@ -1,10 +1,10 @@
-const LIGHT_GREEN = '#33cc33';
-const GREEN = '#80cc33';
-const DARK_GREEN = '#cccc33';
-const ORANGE = '#cc8033';
-const RED = '#cc3333';
-const DARK_RED = '#cc3359';
-const PURPLE = '#cc33a6';
+const LIGHT_GREEN = '#33cc33'
+const GREEN = '#80cc33'
+const DARK_GREEN = '#cccc33'
+const ORANGE = '#cc8033'
+const RED = '#cc3333'
+const DARK_RED = '#cc3359'
+const PURPLE = '#cc33a6'
 
 export const COLORS = {
   hiddenCell: 'grey',
@@ -22,6 +22,6 @@ export const GAME_STATUS = {
   PLAYING: 'playing',
   WON: 'won',
   LOST: 'lost',
-};
+}
 
-export const MINE_QUANTITY = 15;
+export const MINE_QUANTITY = 15
