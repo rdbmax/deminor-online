@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { DataContext } from './DataProvider'
 
 const ToolsWrapper = styled('div')`
   position: absolute;
@@ -19,10 +20,12 @@ const ToolButton = styled('button')`
   margin-right: 10px;
 `
 
-const Tools = ({ time, remainingMine, onRestart }) => (
+const Tools = ({ remainingMine, onRestart }) => (
   <ToolsWrapper>
     <ToolButton onClick={onRestart}>restart</ToolButton>
-    <ToolSpan>{ `time : ${time}` }</ToolSpan>
+    <DataContext.Consumer>{ ([state]) => (
+      <ToolSpan>{ `time : ${state.time}` }</ToolSpan>
+    ) }</DataContext.Consumer>
     <ToolSpan>{ `remaining : ${remainingMine}` }</ToolSpan>
   </ToolsWrapper>
 )

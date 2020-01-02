@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import App from './App';
 import { GAME_STATUS, MINE_QUANTITY, CELL_QUANTITY } from './constants';
 
@@ -81,8 +81,13 @@ export const DataContext = React.createContext(null);
 
 function reducer(state, action) {
   switch (action.type) {
+    case 'TIME_INCREMENT':
+      return (state.status === GAME_STATUS.PLAYING)
+        ? { ...state, time: state.time + 1 }
+        : state;
+
     case 'RESTART':
-      return { ...state, status: GAME_STATUS.PLAYING, cells: getNewGameCells() };
+      return { ...state, status: GAME_STATUS.PLAYING, cells: getNewGameCells(), time: 0 };
 
     case 'SET_CELLS':
       return { ...state, cells: action.payload };
@@ -95,11 +100,26 @@ function reducer(state, action) {
   }
 }
 
+let intervalHolder;
+
 const DataProvider = () => {
   const [state, dispatch] = useReducer(reducer, {
     status: GAME_STATUS.PLAYING,
     cells: getNewGameCells(),
+    time: 0,
   });
+
+  useEffect(() => {
+    if (intervalHolder) {
+      clearInterval(intervalHolder)
+    }
+
+    intervalHolder = setInterval(() => {
+      if (state.status === GAME_STATUS.PLAYING) {
+        dispatch({ type: 'TIME_INCREMENT' });
+      }
+    }, 1000)
+  }, [state.status])
 
   return (
     <DataContext.Provider value={[state, dispatch]}>

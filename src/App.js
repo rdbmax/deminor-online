@@ -45,37 +45,16 @@ class App extends Component {
     }
 
     this.state = {
-      time: 0,
       remainingMine: MINE_QUANTITY,
       scores,
     }
-    this.startTimer()
-  }
-
-  componentWillUnmount() {
-    this.stopTimer()
-  }
-
-  startTimer = () => {
-    if (this.onSecondsChange)
-      this.stopTimer()
-
-    this.onSecondsChange = setInterval(() => {
-      this.setState({ time: this.state.time + 1 })
-    }, 1000)
-  }
-
-  stopTimer = () => {
-    clearInterval(this.onSecondsChange)
   }
 
   restart = () => {
     this.props.dispatch({ type: 'RESTART' });
     this.setState({
-      time: 0,
       remainingMine: MINE_QUANTITY,
     })
-    this.startTimer()
   }
 
   resetScores = () => {
@@ -84,12 +63,11 @@ class App extends Component {
   }
 
   onWin = () => {
-    this.stopTimer()
     this.props.dispatch({ type: 'CHANGE_GAME_STATUS', payload: GAME_STATUS.WON });
 
     const name = prompt('Please enter your name to save your score or cancel')
     if (name) {
-      const { time } = this.state
+      const { time } = this.props.state
       const newScore = { name, time }
       const scoresString = localStorage.getItem('scores')
       const scores = scoresString ? [newScore, ...JSON.parse(scoresString)] : [newScore]
@@ -99,7 +77,6 @@ class App extends Component {
   }
 
   onLose = () => {
-    this.stopTimer()
     this.props.dispatch({ type: 'CHANGE_GAME_STATUS', payload: GAME_STATUS.LOST });
   }
 
@@ -109,12 +86,12 @@ class App extends Component {
   }
 
   render() {
-    const { time, scores, remainingMine } = this.state
+    const { scores, remainingMine } = this.state
 
     return (
       <AppWrapper backgroundColor={this.colors[this.props.state.status]}>
         <Container>
-          <Tools time={time} remainingMine={remainingMine} onRestart={this.restart} />
+          <Tools remainingMine={remainingMine} onRestart={this.restart} />
           <Scores scores={scores} resetScores={this.resetScores} />
 
           <DataContext.Consumer>
