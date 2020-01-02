@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "27135c34db1afb03550e42d1099ff701",
+    "revision": "db02239db8ec0b380112358b76aabf08",
     "url": "/deminor-online/index.html"
   },
   {
-    "revision": "23580c01441324f0ca9f",
+    "revision": "0db0c89e851e82eeb62f",
     "url": "/deminor-online/static/css/main.8bd7711f.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/deminor-online/static/js/2.88303099.chunk.js.LICENSE"
   },
   {
-    "revision": "23580c01441324f0ca9f",
-    "url": "/deminor-online/static/js/main.3bd22033.chunk.js"
+    "revision": "0db0c89e851e82eeb62f",
+    "url": "/deminor-online/static/js/main.51333793.chunk.js"
   },
   {
     "revision": "5ea059f505d9abed6c8d",
