@@ -53,7 +53,7 @@ class App extends Component {
     this.startTimer()
   }
 
-  componentWillUnMount() {
+  componentWillUnmount() {
     this.stopTimer()
   }
 
