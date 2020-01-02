@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/rdbmax/deminor-online.svg?branch=master)](https://travis-ci.org/rdbmax/deminor-online)
+![](https://github.com/rdbmax/deminor-online/workflows/Deploy/badge.svg)
 
 ## Deminor-online
 
