@@ -7,20 +7,20 @@ import { GAME_STATUS, MINE_QUANTITY } from './constants'
 import { DataContext } from './DataProvider';
 
 const Container = styled('div')`
-  width: 400px
-  height: 400px
-  position: absolute
-  left: 50%
-  top: 50%
-  transform: translate(-50%, -50%)
-  background-color: #949494
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #949494;
 `
 
 const AppWrapper = styled('div')`
-  position: relative
-  width: 100vw
-  height: 100vh
-  background-color: ${({ backgroundColor }) => backgroundColor}
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: ${({ backgroundColor }) => backgroundColor};
 `
 
 class App extends Component {
