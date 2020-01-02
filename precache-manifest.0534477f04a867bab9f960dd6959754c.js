@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5207fbdbd6b28b6c4cfa88afd6a9cd27",
+    "revision": "db02239db8ec0b380112358b76aabf08",
     "url": "/deminor-online/index.html"
   },
   {
-    "revision": "c8673b92e269284be404",
+    "revision": "0db0c89e851e82eeb62f",
     "url": "/deminor-online/static/css/main.8bd7711f.chunk.css"
   },
   {
-    "revision": "f024847fd31dd8e34717",
-    "url": "/deminor-online/static/js/2.31bd876b.chunk.js"
+    "revision": "c5bd0431e6f97763b5d3",
+    "url": "/deminor-online/static/js/2.88303099.chunk.js"
   },
   {
     "revision": "43611ca47bc87426c262f014dde99c44",
-    "url": "/deminor-online/static/js/2.31bd876b.chunk.js.LICENSE"
+    "url": "/deminor-online/static/js/2.88303099.chunk.js.LICENSE"
   },
   {
-    "revision": "c8673b92e269284be404",
-    "url": "/deminor-online/static/js/main.9c74c89a.chunk.js"
+    "revision": "0db0c89e851e82eeb62f",
+    "url": "/deminor-online/static/js/main.51333793.chunk.js"
   },
   {
     "revision": "5ea059f505d9abed6c8d",
