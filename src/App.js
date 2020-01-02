@@ -4,6 +4,7 @@ import Game from './Game'
 import Tools from './Tools'
 import Scores from './Scores'
 import { GAME_STATUS, MINE_QUANTITY } from './constants'
+import { DataContext } from './DataProvider';
 
 const Container = styled('div')`
   width: 400px
@@ -44,9 +45,7 @@ class App extends Component {
     }
 
     this.state = {
-      status: GAME_STATUS.PLAYING,
       time: 0,
-      nbTry: 0,
       remainingMine: MINE_QUANTITY,
       scores,
     }
@@ -71,11 +70,10 @@ class App extends Component {
   }
 
   restart = () => {
+    this.props.dispatch({ type: 'RESTART' });
     this.setState({
       time: 0,
-      status: GAME_STATUS.PLAYING,
       remainingMine: MINE_QUANTITY,
-      nbTry: this.state.nbTry + 1,
     })
     this.startTimer()
   }
@@ -87,7 +85,7 @@ class App extends Component {
 
   onWin = () => {
     this.stopTimer()
-    this.setState({ status: GAME_STATUS.WON })
+    this.props.dispatch({ type: 'CHANGE_GAME_STATUS', payload: GAME_STATUS.WON });
 
     const name = prompt('Please enter your name to save your score or cancel')
     if (name) {
@@ -102,7 +100,7 @@ class App extends Component {
 
   onLose = () => {
     this.stopTimer()
-    this.setState({ status: GAME_STATUS.LOST })
+    this.props.dispatch({ type: 'CHANGE_GAME_STATUS', payload: GAME_STATUS.LOST });
   }
 
   onPutFlag = flagAmount => {
@@ -111,23 +109,28 @@ class App extends Component {
   }
 
   render() {
-    const { time, status, nbTry, scores, remainingMine } = this.state
+    const { time, scores, remainingMine } = this.state
 
     return (
-      <AppWrapper backgroundColor={this.colors[status]}>
+      <AppWrapper backgroundColor={this.colors[this.props.state.status]}>
         <Container>
-          <Tools time={time} status={status} remainingMine={remainingMine} onRestart={this.restart} />
+          <Tools time={time} remainingMine={remainingMine} onRestart={this.restart} />
           <Scores scores={scores} resetScores={this.resetScores} />
 
-          <Game
-            status={status}
-            nbTry={nbTry}
-            cellQuantity={100}
-            mineQuantity={MINE_QUANTITY}
-            onLose={this.onLose}
-            onWin={this.onWin}
-            onPutFlag={this.onPutFlag}
-          />
+          <DataContext.Consumer>
+            { ([state, dispatch]) => (
+              <Game
+                dispatch={dispatch}
+                cells={state.cells}
+                status={state.status}
+                cellQuantity={100}
+                mineQuantity={MINE_QUANTITY}
+                onLose={this.onLose}
+                onWin={this.onWin}
+                onPutFlag={this.onPutFlag}
+              />
+            ) }
+          </DataContext.Consumer>
         </Container>
       </AppWrapper>
     )

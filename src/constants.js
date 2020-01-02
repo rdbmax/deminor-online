@@ -25,3 +25,4 @@ export const GAME_STATUS = {
 }
 
 export const MINE_QUANTITY = 15
+export const CELL_QUANTITY = 100

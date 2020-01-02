@@ -32,7 +32,7 @@ const IconStyled = styled('img')`
   width: 100%
 `
 
-const Cell = ({ cell, onClick, children, onContextClick }) => (
+const Cell = ({ cell, onClick, onContextClick }) => (
   <CellStyled cell={cell} onClick={onClick} onContextMenu={onContextClick}>
     {
       cell.hidden

@@ -19,7 +19,7 @@ const ToolButton = styled('button')`
   margin-right: 10px
 `
 
-const Tools = ({ time, status, remainingMine, onRestart }) => (
+const Tools = ({ time, remainingMine, onRestart }) => (
   <ToolsWrapper>
     <ToolButton onClick={onRestart}>restart</ToolButton>
     <ToolSpan>{ `time : ${time}` }</ToolSpan>
