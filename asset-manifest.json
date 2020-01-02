@@ -1,15 +1,24 @@
 {
-  "main.css": "/deminor-online/static/css/main.ce101f01.chunk.css",
-  "main.js": "/deminor-online/static/js/main.296fbd9c.chunk.js",
-  "main.js.map": "/deminor-online/static/js/main.296fbd9c.chunk.js.map",
-  "static/js/1.90d716f4.chunk.js": "/deminor-online/static/js/1.90d716f4.chunk.js",
-  "static/js/1.90d716f4.chunk.js.map": "/deminor-online/static/js/1.90d716f4.chunk.js.map",
-  "runtime~main.js": "/deminor-online/static/js/runtime~main.c46586e2.js",
-  "runtime~main.js.map": "/deminor-online/static/js/runtime~main.c46586e2.js.map",
-  "static/css/main.ce101f01.chunk.css.map": "/deminor-online/static/css/main.ce101f01.chunk.css.map",
-  "static/media/ios-flag.svg": "/deminor-online/static/media/ios-flag.5b62c93f.svg",
-  "static/media/md-flame.svg": "/deminor-online/static/media/md-flame.64a3f009.svg",
-  "index.html": "/deminor-online/index.html",
-  "precache-manifest.ab3a1a2fee21cec4631788783816eff3.js": "/deminor-online/precache-manifest.ab3a1a2fee21cec4631788783816eff3.js",
-  "service-worker.js": "/deminor-online/service-worker.js"
+  "files": {
+    "main.css": "/deminor-online/static/css/main.0cd47cbc.chunk.css",
+    "main.js": "/deminor-online/static/js/main.cea9f12a.chunk.js",
+    "main.js.map": "/deminor-online/static/js/main.cea9f12a.chunk.js.map",
+    "runtime-main.js": "/deminor-online/static/js/runtime-main.58f1ed41.js",
+    "runtime-main.js.map": "/deminor-online/static/js/runtime-main.58f1ed41.js.map",
+    "static/js/2.31bd876b.chunk.js": "/deminor-online/static/js/2.31bd876b.chunk.js",
+    "static/js/2.31bd876b.chunk.js.map": "/deminor-online/static/js/2.31bd876b.chunk.js.map",
+    "index.html": "/deminor-online/index.html",
+    "precache-manifest.72ea5e7907dd8885e92f36a1f42ea9f5.js": "/deminor-online/precache-manifest.72ea5e7907dd8885e92f36a1f42ea9f5.js",
+    "service-worker.js": "/deminor-online/service-worker.js",
+    "static/css/main.0cd47cbc.chunk.css.map": "/deminor-online/static/css/main.0cd47cbc.chunk.css.map",
+    "static/js/2.31bd876b.chunk.js.LICENSE": "/deminor-online/static/js/2.31bd876b.chunk.js.LICENSE",
+    "static/media/ios-flag.svg": "/deminor-online/static/media/ios-flag.5b62c93f.svg",
+    "static/media/md-flame.svg": "/deminor-online/static/media/md-flame.64a3f009.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.58f1ed41.js",
+    "static/js/2.31bd876b.chunk.js",
+    "static/css/main.0cd47cbc.chunk.css",
+    "static/js/main.cea9f12a.chunk.js"
+  ]
 }
