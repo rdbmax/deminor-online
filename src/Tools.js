@@ -20,14 +20,16 @@ const ToolButton = styled('button')`
   margin-right: 10px;
 `
 
-const Tools = ({ remainingMine, onRestart }) => (
-  <ToolsWrapper>
-    <ToolButton onClick={onRestart}>restart</ToolButton>
-    <DataContext.Consumer>{ ([state]) => (
-      <ToolSpan>{ `time : ${state.time}` }</ToolSpan>
-    ) }</DataContext.Consumer>
-    <ToolSpan>{ `remaining : ${remainingMine}` }</ToolSpan>
-  </ToolsWrapper>
+const Tools = ({ onRestart }) => (
+  <DataContext.Consumer>{ ([state]) => (
+    <ToolsWrapper>
+      <ToolButton onClick={onRestart}>restart</ToolButton>
+      
+        <ToolSpan>{ `time : ${state.time}` }</ToolSpan>
+      
+      <ToolSpan>{ `remaining : ${state.remainingMine}` }</ToolSpan>
+    </ToolsWrapper>
+  ) }</DataContext.Consumer>
 )
 
 export default Tools

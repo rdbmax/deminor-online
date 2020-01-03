@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Cell from './Cell'
 import { getCloseCells } from './DataProvider';
-import { GAME_STATUS } from './constants'
+import { GAME_STATUS, MINE_QUANTITY } from './constants'
 
 class Game extends Component {
 
@@ -41,13 +41,13 @@ class Game extends Component {
 
   onClickCell = cellClicked => () => {
     const { cells } = this.props
-    const { status, onLose, onWin } = this.props
+    const { status, onWin } = this.props
 
     if (cellClicked.flag || status !== GAME_STATUS.PLAYING)
       return
 
     if (cellClicked.type === 'mine')
-      onLose()
+      this.props.dispatch({ type: 'CHANGE_GAME_STATUS', payload: GAME_STATUS.LOST });
 
     const cellsToShow = (cellClicked.type === 'clean' && cellClicked.mines === 0)
       ? this.findNullCells([cellClicked]).map(({ position }) => position)
@@ -64,8 +64,6 @@ class Game extends Component {
   }
 
   onContextMenu = cellClicked => e => {
-    const { onPutFlag } = this.props
-
     if (cellClicked.hidden === true) {
       e.preventDefault()
 
@@ -74,9 +72,14 @@ class Game extends Component {
           : cell)
 
       const flagAmount = newCells.filter(({ flag }) => flag).length
-      onPutFlag(flagAmount)
 
-      this.props.dispatch({ type: 'SET_CELLS', payload: newCells })
+      this.props.dispatch({
+        type: 'ON_PUT_FLAG',
+        payload: {
+          remainingMine: (MINE_QUANTITY - flagAmount),
+          cells: newCells,
+        },
+      })
     }
   }
 

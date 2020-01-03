@@ -23,6 +23,12 @@ const AppWrapper = styled('div')`
   background-color: ${({ backgroundColor }) => backgroundColor};
 `
 
+const COLORS = {
+  playing: 'black',
+  won: 'green',
+  lost: 'red',
+}
+
 class App extends Component {
   constructor() {
     super()
@@ -38,23 +44,11 @@ class App extends Component {
 
     localStorage.setItem('scores', JSON.stringify(scores))
 
-    this.colors = {
-      playing: 'black',
-      won: 'green',
-      lost: 'red',
-    }
-
-    this.state = {
-      remainingMine: MINE_QUANTITY,
-      scores,
-    }
+    this.state = { scores }
   }
 
   restart = () => {
     this.props.dispatch({ type: 'RESTART' });
-    this.setState({
-      remainingMine: MINE_QUANTITY,
-    })
   }
 
   resetScores = () => {
@@ -76,23 +70,12 @@ class App extends Component {
     }
   }
 
-  onLose = () => {
-    this.props.dispatch({ type: 'CHANGE_GAME_STATUS', payload: GAME_STATUS.LOST });
-  }
-
-  onPutFlag = flagAmount => {
-    const remainingMine = MINE_QUANTITY - flagAmount
-    this.setState({ remainingMine })
-  }
-
   render() {
-    const { scores, remainingMine } = this.state
-
     return (
-      <AppWrapper backgroundColor={this.colors[this.props.state.status]}>
+      <AppWrapper backgroundColor={COLORS[this.props.state.status]}>
         <Container>
-          <Tools remainingMine={remainingMine} onRestart={this.restart} />
-          <Scores scores={scores} resetScores={this.resetScores} />
+          <Tools onRestart={this.restart} />
+          <Scores scores={this.state.scores} resetScores={this.resetScores} />
 
           <DataContext.Consumer>
             { ([state, dispatch]) => (
@@ -102,9 +85,7 @@ class App extends Component {
                 status={state.status}
                 cellQuantity={100}
                 mineQuantity={MINE_QUANTITY}
-                onLose={this.onLose}
                 onWin={this.onWin}
-                onPutFlag={this.onPutFlag}
               />
             ) }
           </DataContext.Consumer>

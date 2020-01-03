@@ -87,13 +87,26 @@ function reducer(state, action) {
         : state;
 
     case 'RESTART':
-      return { ...state, status: GAME_STATUS.PLAYING, cells: getNewGameCells(), time: 0 };
+      return {
+        ...state,
+        status: GAME_STATUS.PLAYING,
+        cells: getNewGameCells(),
+        time: 0,
+        remainingMine: MINE_QUANTITY,
+      };
 
     case 'SET_CELLS':
       return { ...state, cells: action.payload };
 
     case 'CHANGE_GAME_STATUS':
       return { ...state, status: action.payload };
+
+    case 'ON_PUT_FLAG':
+      return {
+        ...state,
+        remainingMine: action.payload.remainingMine,
+        cells: action.payload.cells,
+      };
 
     default:
       throw new Error();
@@ -107,6 +120,7 @@ const DataProvider = () => {
     status: GAME_STATUS.PLAYING,
     cells: getNewGameCells(),
     time: 0,
+    remainingMine: MINE_QUANTITY,
   });
 
   useEffect(() => {
