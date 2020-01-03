@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/deminor-online/precache-manifest.0534477f04a867bab9f960dd6959754c.js"
+  "/deminor-online/precache-manifest.8de86276cee2b0b123be97c91ecfe44c.js"
 );
 
 self.addEventListener('message', (event) => {

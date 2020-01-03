@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "db02239db8ec0b380112358b76aabf08",
+    "revision": "cadd59684d79a7b254271165346057e0",
     "url": "/deminor-online/index.html"
   },
   {
-    "revision": "0db0c89e851e82eeb62f",
+    "revision": "f1d4b13fca7c18f60a19",
     "url": "/deminor-online/static/css/main.8bd7711f.chunk.css"
   },
   {
-    "revision": "c5bd0431e6f97763b5d3",
-    "url": "/deminor-online/static/js/2.88303099.chunk.js"
+    "revision": "b58084d6dfb9f3ca2585",
+    "url": "/deminor-online/static/js/2.7fa9e097.chunk.js"
   },
   {
-    "revision": "43611ca47bc87426c262f014dde99c44",
-    "url": "/deminor-online/static/js/2.88303099.chunk.js.LICENSE"
+    "revision": "e928fe768baa9832b5bc57eae021f30c",
+    "url": "/deminor-online/static/js/2.7fa9e097.chunk.js.LICENSE"
   },
   {
-    "revision": "0db0c89e851e82eeb62f",
-    "url": "/deminor-online/static/js/main.51333793.chunk.js"
+    "revision": "f1d4b13fca7c18f60a19",
+    "url": "/deminor-online/static/js/main.4dbdc9e0.chunk.js"
   },
   {
     "revision": "5ea059f505d9abed6c8d",
