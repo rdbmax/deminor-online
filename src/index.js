@@ -1,10 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-import App from './App'
+import DataProvider from './DataProvider'
 import registerServiceWorker from './registerServiceWorker'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<DataProvider />, document.getElementById('root'))
 registerServiceWorker()
-
-console.log('Deployed with Github actions')
